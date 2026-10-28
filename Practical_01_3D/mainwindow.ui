@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>760</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Пульт управления БПЛА — Практика 1</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #0d1117;
+    color: #e6edf3;
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 10pt;
+}
+QFrame#controlPanel {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+}
+QFrame#controlPanel QLabel, QFrame#controlPanel QGroupBox {
+    background-color: transparent;
+}
+QLabel#titleLabel {
+    font-size: 15pt;
+    font-weight: bold;
+    color: #ffffff;
+}
+QLabel#subtitleLabel {
+    color: #8b949e;
+}
+QGroupBox {
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    margin-top: 14px;
+    padding: 8px 6px 6px 6px;
+    font-weight: bold;
+    color: #58a6ff;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 12px;
+    padding: 0 4px;
+}
+QGroupBox QLabel {
+    font-weight: normal;
+    color: #c9d1d9;
+}
+QPushButton {
+    background-color: #1f6feb;
+    border: none;
+    border-radius: 6px;
+    padding: 6px;
+    color: #ffffff;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #388bfd;
+}
+QPushButton:pressed {
+    background-color: #1158c7;
+}
+QPushButton#emergencyButton {
+    background-color: #da3633;
+    font-size: 11pt;
+    padding: 9px;
+}
+QPushButton#emergencyButton:hover {
+    background-color: #f85149;
+}
+QPushButton#createButton, QPushButton#setBatteryButton {
+    background-color: #238636;
+}
+QPushButton#createButton:hover, QPushButton#setBatteryButton:hover {
+    background-color: #2ea043;
+}
+QSpinBox, QDoubleSpinBox {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+    padding: 4px;
+}
+QProgressBar {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    text-align: center;
+    min-height: 24px;
+    font-weight: bold;
+}
+QProgressBar::chunk {
+    border-radius: 5px;
+    background-color: #2ea043;
+}
+QProgressBar[level=&quot;low&quot;]::chunk {
+    background-color: #d29922;
+}
+QProgressBar[level=&quot;critical&quot;]::chunk {
+    background-color: #da3633;
+}
+QLabel#statusValue {
+    font-weight: bold;
+    color: #8b949e;
+}
+QLabel#statusValue[flying=&quot;true&quot;] {
+    color: #3fb950;
+}
+QLabel#logTitle {
+    color: #8b949e;
+    font-weight: bold;
+}
+QTextEdit#logView {
+    background-color: #010409;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    font-family: Consolas;
+    font-size: 10pt;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="mainLayout" stretch="0,1">
+    <property name="spacing">
+     <number>12</number>
+    </property>
+    <property name="leftMargin">
+     <number>12</number>
+    </property>
+    <property name="topMargin">
+     <number>12</number>
+    </property>
+    <property name="rightMargin">
+     <number>12</number>
+    </property>
+    <property name="bottomMargin">
+     <number>12</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="controlPanel">
+      <property name="minimumSize">
+       <size>
+        <width>330</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>360</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="panelLayout">
+       <property name="spacing">
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="titleLabel">
+         <property name="text">
+          <string>ПУЛЬТ УПРАВЛЕНИЯ БПЛА</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="subtitleLabel">
+         <property name="text">
+          <string>Практика 1 · Задание 1 · Вариант 1</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupCreate">
+         <property name="title">
+          <string>Создание аппарата</string>
+         </property>
+         <layout class="QGridLayout" name="createLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="idLabel">
+            <property name="text">
+             <string>Номер:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="idSpin">
+            <property name="maximum">
+             <number>99</number>
+            </property>
+            <property name="value">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="createBatteryLabel">
+            <property name="text">
+             <string>Заряд:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QDoubleSpinBox" name="createBatterySpin">
+            <property name="suffix">
+             <string> %</string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="minimum">
+             <double>-50</double>
+            </property>
+            <property name="maximum">
+             <double>150</double>
+            </property>
+            <property name="value">
+             <double>85</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="4">
+           <widget class="QPushButton" name="createButton">
+            <property name="text">
+             <string>Создать новый дрон</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupFlight">
+         <property name="title">
+          <string>Управление полётом</string>
+         </property>
+         <layout class="QGridLayout" name="flightLayout">
+          <item row="0" column="0">
+           <widget class="QPushButton" name="takeoffButton">
+            <property name="text">
+             <string>Взлёт</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QPushButton" name="landButton">
+            <property name="text">
+             <string>Посадка</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="xLabel">
+            <property name="text">
+             <string>X, м</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="yLabel">
+            <property name="text">
+             <string>Y, м</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="zLabel">
+            <property name="text">
+             <string>Высота Z, м</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QDoubleSpinBox" name="xSpin">
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="minimum">
+             <double>-100</double>
+            </property>
+            <property name="maximum">
+             <double>100</double>
+            </property>
+            <property name="value">
+             <double>40</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="ySpin">
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="minimum">
+             <double>-100</double>
+            </property>
+            <property name="maximum">
+             <double>100</double>
+            </property>
+            <property name="value">
+             <double>30</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QDoubleSpinBox" name="zSpin">
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="minimum">
+             <double>-20</double>
+            </property>
+            <property name="maximum">
+             <double>80</double>
+            </property>
+            <property name="value">
+             <double>50</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="3">
+           <widget class="QPushButton" name="moveButton">
+            <property name="text">
+             <string>Лететь в точку</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="3">
+           <widget class="QPushButton" name="emergencyButton">
+            <property name="text">
+             <string>⚠ АВАРИЙНАЯ ПОСАДКА</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBattery">
+         <property name="title">
+          <string>Батарея</string>
+         </property>
+         <layout class="QVBoxLayout" name="batteryLayout">
+          <item>
+           <widget class="QProgressBar" name="batteryBar">
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="setBatteryLayout">
+            <item>
+             <widget class="QDoubleSpinBox" name="batterySpin">
+              <property name="suffix">
+               <string> %</string>
+              </property>
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="minimum">
+               <double>-50.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>150.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>8.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="setBatteryButton">
+              <property name="text">
+               <string>Установить</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupState">
+         <property name="title">
+          <string>Телеметрия</string>
+         </property>
+         <layout class="QFormLayout" name="stateLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="idCaption">
+            <property name="text">
+             <string>Аппарат:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="idValue">
+            <property name="text">
+             <string>#1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="positionCaption">
+            <property name="text">
+             <string>Позиция:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="positionValue">
+            <property name="text">
+             <string>(0, 0, 0) m</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="statusCaption">
+            <property name="text">
+             <string>Статус:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="statusValue">
+            <property name="text">
+             <string>ON GROUND</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="panelSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="rightLayout" stretch="1,0,0">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="sceneHost" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>600</width>
+          <height>400</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="logTitle">
+        <property name="text">
+         <string>ЖУРНАЛ СОБЫТИЙ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="logView">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>120</height>
+         </size>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

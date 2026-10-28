@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>760</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Навигационные векторы БПЛА — Практика 2</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #0d1117;
+    color: #e6edf3;
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 10pt;
+}
+QFrame#controlPanel {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+}
+QFrame#controlPanel QLabel, QFrame#controlPanel QGroupBox, QTabWidget QWidget#windTab, QTabWidget QWidget#routeTab {
+    background-color: transparent;
+}
+QLabel#titleLabel {
+    font-size: 15pt;
+    font-weight: bold;
+    color: #ffffff;
+}
+QLabel#subtitleLabel {
+    color: #8b949e;
+}
+QTabWidget::pane {
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    top: -1px;
+}
+QTabBar::tab {
+    background-color: #0d1117;
+    color: #8b949e;
+    border: 1px solid #30363d;
+    padding: 6px 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+QTabBar::tab:selected {
+    background-color: #1f6feb;
+    color: #ffffff;
+    font-weight: bold;
+}
+QGroupBox {
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    margin-top: 14px;
+    padding: 8px 6px 6px 6px;
+    font-weight: bold;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 12px;
+    padding: 0 4px;
+}
+QGroupBox#droneGroup { color: #58a6ff; }
+QGroupBox#windGroup { color: #f0883e; }
+QGroupBox#startGroup { color: #3fb950; }
+QGroupBox#finishGroup { color: #f85149; }
+QGroupBox#windResultGroup, QGroupBox#routeResultGroup { color: #e3b341; }
+QGroupBox QLabel {
+    font-weight: normal;
+    color: #c9d1d9;
+}
+QLabel[result=&quot;true&quot;] {
+    font-family: Consolas;
+    font-weight: bold;
+    color: #ffffff;
+}
+QLabel#checkValue {
+    font-weight: bold;
+    color: #f85149;
+}
+QLabel#checkValue[ok=&quot;true&quot;] {
+    color: #3fb950;
+}
+QPushButton {
+    background-color: #1f6feb;
+    border: none;
+    border-radius: 6px;
+    padding: 9px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 11pt;
+}
+QPushButton:hover {
+    background-color: #388bfd;
+}
+QPushButton:pressed {
+    background-color: #1158c7;
+}
+QDoubleSpinBox {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+    padding: 4px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="mainLayout" stretch="0,1">
+    <property name="spacing">
+     <number>12</number>
+    </property>
+    <property name="leftMargin">
+     <number>12</number>
+    </property>
+    <property name="topMargin">
+     <number>12</number>
+    </property>
+    <property name="rightMargin">
+     <number>12</number>
+    </property>
+    <property name="bottomMargin">
+     <number>12</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="controlPanel">
+      <property name="minimumSize">
+       <size>
+        <width>360</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>400</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="panelLayout">
+       <item>
+        <widget class="QLabel" name="titleLabel">
+         <property name="text">
+          <string>НАВИГАЦИОННЫЕ ВЕКТОРЫ</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="subtitleLabel">
+         <property name="text">
+          <string>Практика 2 · Задание 1 · Варианты 1 и 2</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTabWidget" name="taskTabs">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="windTab">
+          <attribute name="title">
+           <string>Вариант 1 · Скорость</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="windTabLayout">
+           <item>
+            <widget class="QGroupBox" name="droneGroup">
+             <property name="title">
+              <string>Воздушная скорость дрона, м/с</string>
+             </property>
+             <layout class="QGridLayout" name="droneGroupLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="droneXLabel">
+                <property name="text">
+                 <string>X</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QDoubleSpinBox" name="droneXSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-50</double>
+                </property>
+                <property name="maximum">
+                 <double>50</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>10</double>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="droneYLabel">
+                <property name="text">
+                 <string>Y</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QDoubleSpinBox" name="droneYSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-50</double>
+                </property>
+                <property name="maximum">
+                 <double>50</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>4</double>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="droneZLabel">
+                <property name="text">
+                 <string>Z</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QDoubleSpinBox" name="droneZSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-50</double>
+                </property>
+                <property name="maximum">
+                 <double>50</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>-1</double>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="windGroup">
+             <property name="title">
+              <string>Скорость ветра, м/с</string>
+             </property>
+             <layout class="QGridLayout" name="windGroupLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="windXLabel">
+                <property name="text">
+                 <string>X</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QDoubleSpinBox" name="windXSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-50</double>
+                </property>
+                <property name="maximum">
+                 <double>50</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>2</double>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="windYLabel">
+                <property name="text">
+                 <string>Y</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QDoubleSpinBox" name="windYSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-50</double>
+                </property>
+                <property name="maximum">
+                 <double>50</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>-1</double>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="windZLabel">
+                <property name="text">
+                 <string>Z</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QDoubleSpinBox" name="windZSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-50</double>
+                </property>
+                <property name="maximum">
+                 <double>50</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>0</double>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="factorLayout">
+             <item>
+              <widget class="QLabel" name="factorLabel">
+               <property name="text">
+                <string>Коэффициент автопилота k:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="factorSpin">
+               <property name="decimals">
+                <number>2</number>
+               </property>
+               <property name="minimum">
+                <double>0</double>
+               </property>
+               <property name="maximum">
+                <double>2</double>
+               </property>
+               <property name="singleStep">
+                <double>0.05</double>
+               </property>
+               <property name="value">
+                <double>0.8</double>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="windResultGroup">
+             <property name="title">
+              <string>Результат</string>
+             </property>
+             <layout class="QGridLayout" name="windResultGroupLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="groundCaption">
+                <property name="text">
+                 <string>Скорость отн. земли:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="groundValue">
+                <property name="text">
+                 <string>—</string>
+                </property>
+                <property name="result" stdset="0">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="speedCaption">
+                <property name="text">
+                 <string>Модуль скорости:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="speedValue">
+                <property name="text">
+                 <string>—</string>
+                </property>
+                <property name="result" stdset="0">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="correctionCaption">
+                <property name="text">
+                 <string>Поправка k·v:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLabel" name="correctionValue">
+                <property name="text">
+                 <string>—</string>
+                </property>
+                <property name="result" stdset="0">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="correctionLengthCaption">
+                <property name="text">
+                 <string>Длина поправки:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLabel" name="correctionLengthValue">
+                <property name="text">
+                 <string>—</string>
+                </property>
+                <property name="result" stdset="0">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="windTabLayoutSpacer">
+             <property name="orientation">
+              <enum>Qt::Orientation::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>0</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="routeTab">
+          <attribute name="title">
+           <string>Вариант 2 · Маршрут</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="routeTabLayout">
+           <item>
+            <widget class="QGroupBox" name="startGroup">
+             <property name="title">
+              <string>Старт, м</string>
+             </property>
+             <layout class="QGridLayout" name="startGroupLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="startXLabel">
+                <property name="text">
+                 <string>X</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QDoubleSpinBox" name="startXSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-1000</double>
+                </property>
+                <property name="maximum">
+                 <double>1000</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>0</double>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="startYLabel">
+                <property name="text">
+                 <string>Y</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QDoubleSpinBox" name="startYSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-1000</double>
+                </property>
+                <property name="maximum">
+                 <double>1000</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>0</double>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="startZLabel">
+                <property name="text">
+                 <string>Z</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QDoubleSpinBox" name="startZSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-1000</double>
+                </property>
+                <property name="maximum">
+                 <double>1000</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>100</double>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="finishGroup">
+             <property name="title">
+              <string>Финиш, м</string>
+             </property>
+             <layout class="QGridLayout" name="finishGroupLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="finishXLabel">
+                <property name="text">
+                 <string>X</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QDoubleSpinBox" name="finishXSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-1000</double>
+                </property>
+                <property name="maximum">
+                 <double>1000</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>300</double>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="finishYLabel">
+                <property name="text">
+                 <string>Y</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QDoubleSpinBox" name="finishYSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-1000</double>
+                </property>
+                <property name="maximum">
+                 <double>1000</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>200</double>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="finishZLabel">
+                <property name="text">
+                 <string>Z</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QDoubleSpinBox" name="finishZSpin">
+                <property name="decimals">
+                 <number>1</number>
+                </property>
+                <property name="minimum">
+                 <double>-1000</double>
+                </property>
+                <property name="maximum">
+                 <double>1000</double>
+                </property>
+                <property name="singleStep">
+                 <double>1.0</double>
+                </property>
+                <property name="value">
+                 <double>150</double>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="routeResultGroup">
+             <property name="title">
+              <string>Результат</string>
+             </property>
+             <layout class="QGridLayout" name="routeResultGroupLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="displacementCaption">
+                <property name="text">
+                 <string>Перемещение:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="displacementValue">
+                <property name="text">
+                 <string>—</string>
+                </property>
+                <property name="result" stdset="0">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="dxCaption">
+                <property name="text">
+                 <string>Изменение X:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="dxValue">
+                <property name="text">
+                 <string>—</string>
+                </property>
+                <property name="result" stdset="0">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="dyCaption">
+                <property name="text">
+                 <string>Изменение Y:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLabel" name="dyValue">
+                <property name="text">
+                 <string>—</string>
+                </property>
+                <property name="result" stdset="0">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="dzCaption">
+                <property name="text">
+                 <string>Изменение высоты:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLabel" name="dzValue">
+                <property name="text">
+                 <string>—</string>
+                </property>
+                <property name="result" stdset="0">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="distanceCaption">
+                <property name="text">
+                 <string>Длина перемещения:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLabel" name="distanceValue">
+                <property name="text">
+                 <string>—</string>
+                </property>
+                <property name="result" stdset="0">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="checkCaption">
+                <property name="text">
+                 <string>Проверка:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLabel" name="checkValue">
+                <property name="text">
+                 <string>—</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="routeTabLayoutSpacer">
+             <property name="orientation">
+              <enum>Qt::Orientation::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>0</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="animateButton">
+         <property name="text">
+          <string>▶ Анимировать построение</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="sceneHost" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>600</width>
+        <height>400</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
